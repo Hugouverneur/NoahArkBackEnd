@@ -21,7 +21,7 @@ function createRouter(db) {
 
     router.get('/kingdoms', function (req, res, next) {
         db.query(
-            'SELECT * FROM kingdoms ORDER BY kingdom_id',
+            'SELECT * FROM kingdoms ORDER BY kingdom_name',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
