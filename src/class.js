@@ -6,8 +6,8 @@ function createRouter(db) {
     router.post('/class', (req, res, next) => {
         console.log(req.body);
         db.query(
-            'INSERT INTO class (class_name, genus_id) VALUES (?,?)', // Requete SQL
-            [req.body.class_name, req.body.genus_id], // Données qui remplaceront les ?. /!\ Bien vérifier que le nom des clés correspond à ce qui est envoyé coté front
+            'INSERT INTO class (class_name, phylum_id) VALUES (?,?)', // Requete SQL
+            [req.body.class_name, req.body.phylum_id], // Données qui remplaceront les ?. /!\ Bien vérifier que le nom des clés correspond à ce qui est envoyé coté front
             (error) => {
                 if (error) {
                     console.error(error);
@@ -21,7 +21,7 @@ function createRouter(db) {
 
     router.get('/class', function (req, res, next) {
         db.query(
-            'SELECT * FROM class ORDER BY class_name',
+            'SELECT * FROM class c JOIN phylums p ON c.phylum_id = p.phylum_id JOIN kingdoms k ON p.kingdom_id = k.kingdom_id ORDER BY class_name',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {

@@ -21,7 +21,7 @@ function createRouter(db) {
 
     router.get('/genus', function (req, res, next) {
         db.query(
-            'SELECT * FROM genus ORDER BY genus_id',
+            'SELECT * FROM genus g JOIN familys f ON g.family_id = f.family_id JOIN orders o ON f.order_id = o.order_id JOIN class c ON o.class_id = c.class_id JOIN phylums p ON c.phylum_id = p.phylum_id JOIN kingdoms k ON p.kingdom_id = k.kingdom_id ORDER BY g.genus_name',
             [10*(req.params.page || 0)],
             (error, results) => {
                 if (error) {
