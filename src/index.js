@@ -11,6 +11,8 @@ const familys = require('./familys');
 const genus = require('./genus');
 const spicies = require('./spicies');
 const site = require('./site');
+const storage = require('./storage');
+const rooms = require('./rooms');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -35,6 +37,8 @@ const app = express()
     .use(genus(connection))
     .use(spicies(connection))
     .use(site(connection))
+    .use(storage(connection))
+    .use(rooms(connection))
 
 app.listen(port, () => {
     console.log(`Express server listening on port ${port}`);
