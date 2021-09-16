@@ -13,6 +13,7 @@ const spicies = require('./spicies');
 const site = require('./site');
 const storage = require('./storage');
 const rooms = require('./rooms');
+const lots = require('./lots');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -39,6 +40,7 @@ const app = express()
     .use(site(connection))
     .use(storage(connection))
     .use(rooms(connection))
+    .use(lots(connection))
 
 app.listen(port, () => {
     console.log(`Express server listening on port ${port}`);
